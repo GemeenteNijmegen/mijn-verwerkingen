@@ -1,0 +1,28 @@
+{
+  "name": "persoonsgegevens",
+  "version": "1.0.0",
+  "description": "persoonsgegevens lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.100.0",
+    "@aws-sdk/client-secrets-manager": "3.100.0",
+    "@aws-sdk/client-ssm": "3.100.0",
+    "@gemeentenijmegen/apiclient": "0.0.0",
+    "@gemeentenijmegen/session": "^0.0.3",
+    "@gemeentenijmegen/utils": "0.0.0",
+    "axios": "^0.27.2",
+    "cookie": "^0.5.0",
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/types": "3.78.0",
+    "axios-mock-adapter": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "jest-aws-client-mock": "0.0.26"
+  },
+  "author": "",
+  "license": "ISC"
+}

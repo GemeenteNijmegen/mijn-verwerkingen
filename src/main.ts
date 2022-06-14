@@ -1,23 +1,27 @@
-import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+import { App } from 'aws-cdk-lib';
+import { PipelineStack } from './PipelineStack';
 
-export class MyStack extends Stack {
-  constructor(scope: Construct, id: string, props: StackProps = {}) {
-    super(scope, id, props);
+// for development, use sandbox account
+const deploymentEnvironment = {
+  account: '418648875085',
+  region: 'eu-west-1',
+};
 
-    // define resources here...
-  }
-}
-
-// for development, use account/region from cdk cli
-const devEnv = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
+const acceptanceEnvironment = {
+  account: '315037222840',
+  region: 'eu-west-1',
 };
 
 const app = new App();
 
-new MyStack(app, 'mijn-verwerkingen-dev', { env: devEnv });
-// new MyStack(app, 'mijn-verwerkingen-prod', { env: prodEnv });
+if (process.env.BRANCH_NAME == 'acceptance') {
+  new PipelineStack(app, 'mijn-verwerkingen-pipeline-acceptance',
+    {
+      env: deploymentEnvironment,
+      branchName: 'acceptance',
+      deployToEnvironment: acceptanceEnvironment,
+    },
+  );
+}
 
 app.synth();

@@ -2,6 +2,7 @@
   "name": "mijn-verwerkingen",
   "scripts": {
     "build": "npx projen build",
+    "bump": "npx projen bump",
     "bundle": "npx projen bundle",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
@@ -11,15 +12,19 @@
     "diff": "npx projen diff",
     "eject": "npx projen eject",
     "eslint": "npx projen eslint",
+    "install:verwerkingen": "npx projen install:verwerkingen",
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
+    "postinstall": "npx projen postinstall",
     "pre-compile": "npx projen pre-compile",
+    "release:production": "npx projen release:production",
     "synth": "npx projen synth",
     "synth:silent": "npx projen synth:silent",
     "test": "npx projen test",
     "test:update": "npx projen test:update",
     "test:watch": "npx projen test:watch",
+    "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen"
@@ -29,7 +34,7 @@
     "@types/node": "^14",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
-    "aws-cdk": "^2.1.0",
+    "aws-cdk": "^2.28.0",
     "esbuild": "^0.14.43",
     "eslint": "^8",
     "eslint-import-resolver-node": "^0.3.6",
@@ -40,17 +45,33 @@
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
     "projen": "^0.58.12",
+    "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.1.0",
-    "constructs": "^10.0.5"
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.28.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.28.0-alpha.0",
+    "@aws-solutions-constructs/aws-lambda-dynamodb": "^2.9.0",
+    "aws-cdk-lib": "^2.28.0",
+    "constructs": "^10.0.5",
+    "dotenv": "^16.0.1"
   },
-  "license": "Apache-2.0",
+  "license": "EUPL-1.2",
   "version": "0.0.0",
   "jest": {
+    "setupFiles": [
+      "dotenv/config"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/cdk.out"
+    ],
+    "roots": [
+      "src",
+      "test"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
       "<rootDir>/(test|src)/**/?(*.)+(spec|test).ts?(x)"
@@ -66,10 +87,8 @@
     ],
     "coverageDirectory": "coverage",
     "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "/cdk.out"
     ],
     "watchPathIgnorePatterns": [
       "/node_modules/"

@@ -1,6 +1,6 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.22.0',
+  cdkVersion: '2.28.0',
   defaultReleaseBranch: 'production',
   release: true,
   majorVersion: 0,

@@ -1,0 +1,38 @@
+{{>header}}
+
+<main>
+    <!-- START: template component(s) -->
+    <div class="container" id="section-1">
+        <div class="row">
+            <div class="col-12">
+                <h1>Mijn verwerkte persoonsgegevens</h1>
+                <p class="lead">Hier vindt u een overzicht de verwerkingen die de gemeente Nijmegen heeft gedaan met uw persoonsgegevens.</p>
+                {{^error}}
+                <section>
+                <h2>Verwerkingen</h2>
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Datum</th>
+                            <th>Omschrijving</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>06-08-20221</td>
+                            <td>Persoon ingeschreven</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{/error}}
+                {{#error}}
+                <h2>Er is iets misgegaan</h2>
+                <p>{{error}}</p>
+                {{/error}}
+            </div>
+        </div>
+    </div>
+
+    <!-- END: template component(s) -->
+</main>
+{{>footer}}
