@@ -32,7 +32,6 @@ jspm_packages/
 .cache
 .env
 .vscode
-src/app/**/shared
 .DS_Store
 src/app/**/tests/output
 !/.projenrc.js
