@@ -1,5 +1,5 @@
 # MIJN Verwerkingen
-Een demo-applicatie voor het bekijken van je persoonsgegevens binnen de gemeente Nijmegen.
+Een demo-applicatie voor het bekijken van je verwerkte persoonsgegevens binnen de gemeente Nijmegen.
 
 ## Github workflows
 Om de workflows (build, selfmutate, upgrade) te kunnen draaien is een token nodig met de naam PROJEN_GITHUB_TOKEN. Zie https://docs.github.com/en/actions/security-guides/automatic-token-authentication#granting-additional-permissions voor meer details.

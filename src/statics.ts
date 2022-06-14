@@ -1,5 +1,5 @@
 export abstract class Statics {
-  static readonly projectName: string = 'mijn-gegevens';
+  static readonly projectName: string = 'mijn-verwerkingen';
 
   /**
    * Imported arns from Mijn Nijmegen

@@ -2,7 +2,7 @@ import { Stage, StageProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { VerwerkingenApiStack } from './VerwerkingenApiStack';
 
-export interface GegevensApiStageProps extends StageProps {
+export interface VerwerkingenApiStageProps extends StageProps {
   branch: string;
 }
 
@@ -10,9 +10,9 @@ export interface GegevensApiStageProps extends StageProps {
  * Stage responsible for the API Gateway and lambdas
  */
 export class VerwerkingenApiStage extends Stage {
-  constructor(scope: Construct, id: string, props: GegevensApiStageProps) {
+  constructor(scope: Construct, id: string, props: VerwerkingenApiStageProps) {
     super(scope, id, props);
 
-    new VerwerkingenApiStack(this, 'persoonsgegevens-api');
+    new VerwerkingenApiStack(this, 'verwerkingen-api');
   }
 }

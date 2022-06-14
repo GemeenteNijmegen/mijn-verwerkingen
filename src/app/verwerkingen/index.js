@@ -1,6 +1,6 @@
 const { ApiClient } = require('./ApiClient');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { persoonsgegevensRequestHandler } = require("./persoonsgegevensRequestHandler");
+const { verwerkingenRequestHandler } = require("./verwerkingenRequestHandler");
 
 const dynamoDBClient = new DynamoDBClient();
 const apiClient = new ApiClient();

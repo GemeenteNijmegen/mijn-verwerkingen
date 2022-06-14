@@ -50,7 +50,7 @@ export class VerwerkingenApiStack extends Stack {
       sameEnvironment: true,
     });
 
-    const gegevensFunction = new ApiFunction(this, 'verwerkingen-function', {
+    const verwerkingenFunction = new ApiFunction(this, 'verwerkingen-function', {
       description: 'Verwerkingen-lambda voor de Mijn Nijmegen-applicatie.',
       codePath: 'app/verwerkingen',
       table: this.sessionsTable,
@@ -63,13 +63,13 @@ export class VerwerkingenApiStack extends Stack {
       },
       monitoredBy: monitoringFunction,
     });
-    secretMTLSPrivateKey.grantRead(gegevensFunction.lambda);
-    tlskeyParam.grantRead(gegevensFunction.lambda);
-    tlsRootCAParam.grantRead(gegevensFunction.lambda);
+    secretMTLSPrivateKey.grantRead(verwerkingenFunction.lambda);
+    tlskeyParam.grantRead(verwerkingenFunction.lambda);
+    tlsRootCAParam.grantRead(verwerkingenFunction.lambda);
 
     new apigatewayv2.HttpRoute(this, 'verwerkingen-route', {
       httpApi: this.api,
-      integration: new HttpLambdaIntegration('persoonsgegevens', gegevensFunction.lambda),
+      integration: new HttpLambdaIntegration('verwerkingen', verwerkingenFunction.lambda),
       routeKey: HttpRouteKey.with('/verwerkingen', apigatewayv2.HttpMethod.GET),
     });
   }

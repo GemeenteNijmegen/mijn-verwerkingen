@@ -1,7 +1,7 @@
 {
-  "name": "persoonsgegevens",
+  "name": "verwerkingen",
   "version": "1.0.0",
-  "description": "persoonsgegevens lambda",
+  "description": "verwerkingen lambda",
   "main": "index.js",
   "scripts": {
     "test": "npx jest"

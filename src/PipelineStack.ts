@@ -17,16 +17,16 @@ export class PipelineStack extends Stack {
     this.branchName = props.branchName;
     const pipeline = this.pipeline();
 
-    pipeline.addStage(new VerwerkingenApiStage(this, 'mijn-gegevens-api', { env: props.deployToEnvironment, branch: this.branchName }));
+    pipeline.addStage(new VerwerkingenApiStage(this, 'mijn-verwerkingen-api', { env: props.deployToEnvironment, branch: this.branchName }));
   }
 
   pipeline(): pipelines.CodePipeline {
     const connectionArn = new CfnParameter(this, 'connectionArn');
-    const source = pipelines.CodePipelineSource.connection('GemeenteNijmegen/mijn-gegevens', this.branchName, {
+    const source = pipelines.CodePipelineSource.connection('GemeenteNijmegen/mijn-verwerkingen', this.branchName, {
       connectionArn: connectionArn.valueAsString,
     });
-    const pipeline = new pipelines.CodePipeline(this, `mijngegevens-${this.branchName}`, {
-      pipelineName: `mijngegevens-${this.branchName}`,
+    const pipeline = new pipelines.CodePipeline(this, `mijnverwerkingen-${this.branchName}`, {
+      pipelineName: `mijnverwerkingen-${this.branchName}`,
       dockerEnabledForSelfMutation: true,
       dockerEnabledForSynth: true,
       crossAccountKeys: true,
