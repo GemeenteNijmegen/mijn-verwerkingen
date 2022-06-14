@@ -1,7 +1,7 @@
 import { Stack, StackProps, Tags, pipelines, CfnParameter, Environment } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { VerwerkingenApiStage } from './VerwerkingenApiStage';
 import { Statics } from './statics';
+import { VerwerkingenApiStage } from './VerwerkingenApiStage';
 
 export interface PipelineStackProps extends StackProps{
   branchName: string;
