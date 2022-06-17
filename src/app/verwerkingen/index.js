@@ -23,6 +23,7 @@ function parseEvent(event) {
 exports.handler = async (event, context) => {
     try {
         const params = parseEvent(event);
+        console.debug(params);
         await initPromise;
         return await verwerkingenRequestHandler(params.cookies, { startdate: params.startdate, enddate: params.enddate }, apiClient, dynamoDBClient);
     

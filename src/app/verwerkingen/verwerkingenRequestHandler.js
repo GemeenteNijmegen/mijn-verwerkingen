@@ -38,6 +38,7 @@ async function handleLoggedinRequest(session, apiClient, { startdate, enddate}) 
     const brpApi = new BrpApi(apiClient);
     const verwerkingenApi = new VerwerkingenApi();
     console.timeLog('request', 'Brp Api');
+    console.debug(startdate, enddate);
     const [brpData, verwerkingenData] = await Promise.all([brpApi.getBrpData(bsn), verwerkingenApi.getData(bsn, startdate, enddate)]);
     data = {
         'title': 'Verwerkte persoonsgegevens',
