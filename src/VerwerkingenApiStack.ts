@@ -67,6 +67,7 @@ export class VerwerkingenApiStack extends Stack {
       monitoredBy: monitoringFunction,
     });
     secretMTLSPrivateKey.grantRead(verwerkingenFunction.lambda);
+    verwerkingenApiKey.grantRead(verwerkingenFunction.lambda);
     tlskeyParam.grantRead(verwerkingenFunction.lambda);
     tlsRootCAParam.grantRead(verwerkingenFunction.lambda);
 
