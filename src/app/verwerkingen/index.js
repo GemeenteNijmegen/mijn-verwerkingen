@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
     try {
         const params = parseEvent(event);
         await initPromise;
-        return await verwerkingenRequestHandler(params.cookies, { startdate, enddate }, apiClient, dynamoDBClient);
+        return await verwerkingenRequestHandler(params.cookies, { startdate: params.startdate, enddate: params.enddate }, apiClient, dynamoDBClient);
     
     } catch (err) {
         console.debug(err);
