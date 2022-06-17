@@ -41,6 +41,7 @@ export class VerwerkingenApiStack extends Stack {
   setFunctions() {
 
     const secretMTLSPrivateKey = aws_secretsmanager.Secret.fromSecretNameV2(this, 'tls-key-secret', Statics.secretMTLSPrivateKey);
+    const verwerkingenApiKey = aws_secretsmanager.Secret.fromSecretNameV2(this, 'api-key-secret', Statics.ssmVerwerkingenApiKey);
     const tlskeyParam = SSM.StringParameter.fromStringParameterName(this, 'tlskey', Statics.ssmMTLSClientCert);
     const tlsRootCAParam = SSM.StringParameter.fromStringParameterName(this, 'tlsrootca', Statics.ssmMTLSRootCA);
 
@@ -61,7 +62,7 @@ export class VerwerkingenApiStack extends Stack {
         MTLS_ROOT_CA_NAME: Statics.ssmMTLSRootCA,
         BRP_API_URL: SSM.StringParameter.valueForStringParameter(this, Statics.ssmBrpApiEndpointUrl),
         VERWERKINGEN_API_URL: SSM.StringParameter.valueForStringParameter(this, Statics.ssmVerwerkingenApiEndpointUrl),
-        VERWERKINGEN_API_KEY_NAME: SSM.StringParameter.valueForStringParameter(this, Statics.ssmVerwerkingenApiKey),
+        VERWERKINGEN_API_KEY_ARN: verwerkingenApiKey.secretArn,
       },
       monitoredBy: monitoringFunction,
     });

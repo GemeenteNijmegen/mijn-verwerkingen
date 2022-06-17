@@ -15,11 +15,11 @@ class VerwerkingenApi {
      */
      async getApiKey() {
         if (!this.apikey) {
-        if (!process.env.VERWERKINGEN_API_KEY_NAME) {
+        if (!process.env.VERWERKINGEN_API_KEY_ARN) {
                 throw new Error('no secret arn provided');
             }
             const secretsManagerClient = new SecretsManagerClient({});
-            const command = new GetSecretValueCommand({ SecretId: process.env.VERWERKINGEN_API_KEY_NAME });
+            const command = new GetSecretValueCommand({ SecretId: process.env.VERWERKINGEN_API_KEY_ARN });
             const data = await secretsManagerClient.send(command);
             // Depending on whether the secret is a string or binary, one of these fields will be populated.
             if (data === null || data === void 0 ? void 0 : data.SecretString) {

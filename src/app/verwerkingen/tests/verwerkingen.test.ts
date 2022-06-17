@@ -30,7 +30,7 @@ beforeAll(() => {
   process.env.OIDC_SCOPE = 'openid';
 
   process.env.MTLS_PRIVATE_KEY_ARN = 'testarn';
-  process.env.VERWERKINGEN_API_KEY_NAME = 'testarn';
+  process.env.VERWERKINGEN_API_KEY_ARN = 'testarn';
 
   const secretsOutput: GetSecretValueCommandOutput = {
     $metadata: {},
