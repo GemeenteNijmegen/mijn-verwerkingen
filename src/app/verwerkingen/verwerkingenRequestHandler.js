@@ -14,7 +14,7 @@ function redirectResponse(location, code = 302) {
     }
 }
 
-exports.verwerkingenRequestHandler = async (cookies, apiClient, dynamoDBClient) => {
+exports.verwerkingenRequestHandler = async (cookies, { startdate, enddate}, apiClient, dynamoDBClient) => {
     if(!cookies || !apiClient || !dynamoDBClient) { throw new Error('all handler params are required'); }
     console.time('request');
     console.timeLog('request', 'start request');
@@ -24,7 +24,7 @@ exports.verwerkingenRequestHandler = async (cookies, apiClient, dynamoDBClient) 
     console.timeLog('request', 'init session');
     if (session.isLoggedIn() == true) {
         // Get API data
-        const response = await handleLoggedinRequest(session, apiClient);
+        const response = await handleLoggedinRequest(session, apiClient, { startdate, enddate});
         console.timeEnd('request');
         return response;
     }
@@ -32,19 +32,21 @@ exports.verwerkingenRequestHandler = async (cookies, apiClient, dynamoDBClient) 
     return redirectResponse('/login');
 }
 
-async function handleLoggedinRequest(session, apiClient) {
+async function handleLoggedinRequest(session, apiClient, { startdate, enddate}) {
     console.timeLog('request', 'Api Client init');
     const bsn = session.getValue('bsn');
     const brpApi = new BrpApi(apiClient);
     const verwerkingenApi = new VerwerkingenApi();
     console.timeLog('request', 'Brp Api');
-    const [brpData, verwerkingenData] = await Promise.all([brpApi.getBrpData(bsn), verwerkingenApi.getData(bsn, '2022-06-16', '2022-06-30')]);
+    const [brpData, verwerkingenData] = await Promise.all([brpApi.getBrpData(bsn), verwerkingenApi.getData(bsn, startdate, enddate)]);
     data = {
         'title': 'Verwerkte persoonsgegevens',
         'shownav': true
     };
     data.volledigenaam = brpData?.Persoon?.Persoonsgegevens?.Naam ? brpData.Persoon.Persoonsgegevens.Naam : 'Onbekende gebruiker';
     data.items = verwerkingenData.Items;
+    data.startdate = startdate;
+    data.enddate = enddate;
 
     // render page
     const html = await render(data, __dirname + '/templates/verwerkingen.mustache', {

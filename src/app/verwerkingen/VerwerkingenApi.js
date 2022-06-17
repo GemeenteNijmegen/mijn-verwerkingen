@@ -8,6 +8,14 @@ class VerwerkingenApi {
         this.apikey = process.env.API_TOKEN ?? undefined;
     }
 
+    parseDate(date) {
+        const dateString = new Date(date).toISOString();
+        if(dateString === 'Invalid Date') {
+            throw Error("Invalid date");
+        }
+        return dateString;
+    }
+
     /**
      * Retrieve api key from secrets manager
      *
@@ -32,17 +40,19 @@ class VerwerkingenApi {
         return this.apikey;
     }
 
-    async getData(bsn, startdate, enddate) {
+    async getData(bsn, startString, endString) {
         try {
             const aBsn = new Bsn(bsn);
+            const startDate = this.parseDate(startString);
+            const endDate = this.parseDate(endString);
             const apiKey = await this.getApiKey();
             let data = await this.request(
             {  
                 'objecttype': 'persoon',
                 'soortObjectId': 'BSN',
                 'objectId': aBsn.bsn,
-                'beginDatum': startdate,
-                'eindDatum': enddate 
+                'beginDatum': startDate,
+                'eindDatum': endDate 
             }, 
             {
                 'Content-type': 'application/json',
