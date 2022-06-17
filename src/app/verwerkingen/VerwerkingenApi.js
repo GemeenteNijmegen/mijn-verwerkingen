@@ -4,7 +4,7 @@ const { SecretsManagerClient, GetSecretValueCommand } = require('@aws-sdk/client
 
 class VerwerkingenApi {
     constructor() {
-        axios.defaults.baseURL = process.env.BASE_URL;
+        axios.defaults.baseURL = process.env.VERWERKINGEN_BASE_URL;
         this.apikey = process.env.API_TOKEN ?? undefined;
     }
 
