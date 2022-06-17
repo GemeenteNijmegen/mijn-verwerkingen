@@ -1,6 +1,7 @@
 const { render } = require('./shared/render');
 const { BrpApi } = require('./BrpApi');
 const { Session } = require('@gemeentenijmegen/session');
+const { VerwerkingenApi } = require('./VerwerkingenApi');
 
 
 function redirectResponse(location, code = 302) {
@@ -35,14 +36,16 @@ async function handleLoggedinRequest(session, apiClient) {
     console.timeLog('request', 'Api Client init');
     const bsn = session.getValue('bsn');
     const brpApi = new BrpApi(apiClient);
+    const verwerkingenApi = new VerwerkingenApi();
     console.timeLog('request', 'Brp Api');
-
-    const brpData = await brpApi.getBrpData(bsn);
-    const data = brpData;
+    const [brpData, verwerkingenData] = await Promise.all([brpApi.getBrpData(bsn), verwerkingenApi.getData(bsn, '2022-06-16', '2022-06-30')]);
+    data = {
+        'title': 'Verwerkte persoonsgegevens',
+        'shownav': true
+    };
     data.volledigenaam = brpData?.Persoon?.Persoonsgegevens?.Naam ? brpData.Persoon.Persoonsgegevens.Naam : 'Onbekende gebruiker';
+    data.items = verwerkingenData.Items;
 
-    data.title = 'Verwerkte persoonsgegevens';
-    data.shownav = true;
     // render page
     const html = await render(data, __dirname + '/templates/verwerkingen.mustache', {
         'header': __dirname + '/shared/header.mustache',

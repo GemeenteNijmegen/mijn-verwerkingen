@@ -60,6 +60,8 @@ export class VerwerkingenApiStack extends Stack {
         MTLS_CLIENT_CERT_NAME: Statics.ssmMTLSClientCert,
         MTLS_ROOT_CA_NAME: Statics.ssmMTLSRootCA,
         BRP_API_URL: SSM.StringParameter.valueForStringParameter(this, Statics.ssmBrpApiEndpointUrl),
+        VERWERKINGEN_API_URL: SSM.StringParameter.valueForStringParameter(this, Statics.ssmVerwerkingenApiEndpointUrl),
+        VERWERKINGEN_API_KEY_NAME: SSM.StringParameter.valueForStringParameter(this, Statics.ssmVerwerkingenApiKey),
       },
       monitoredBy: monitoringFunction,
     });
