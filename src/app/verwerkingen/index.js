@@ -22,6 +22,7 @@ function parseEvent(event) {
 
 exports.handler = async (event, context) => {
     try {
+        console.debug(event);
         const params = parseEvent(event);
         console.debug(params);
         await initPromise;
