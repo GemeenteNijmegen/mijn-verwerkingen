@@ -15,8 +15,8 @@ const initPromise = init();
 function parseEvent(event) {
     return { 
         'cookies': event?.cookies?.join(';'),
-        'startdate': event?.queryStringParameters?.startdate ?? new Date().toISOString(),
-        'enddate': event?.queryStringParameters?.enddate ?? new Date().toISOString()
+        'startdate': event?.queryStringParameters?.['date-start'] ?? new Date().toISOString(),
+        'enddate': event?.queryStringParameters?.['date-end'] ?? new Date().toISOString()
     };
 }
 
