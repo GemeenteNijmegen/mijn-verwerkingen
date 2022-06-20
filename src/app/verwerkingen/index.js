@@ -13,6 +13,7 @@ async function init() {
 const initPromise = init();
 
 function parseEvent(event) {
+    console.debug('date fromq query ' + event?.queryStringParameters?.['date-start']);
     return { 
         'cookies': event?.cookies?.join(';'),
         'startdate': event?.queryStringParameters?.['date-start'] ?? new Date().toISOString(),
