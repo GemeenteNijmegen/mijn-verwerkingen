@@ -46,8 +46,8 @@ async function handleLoggedinRequest(session, apiClient, { startdate, enddate}) 
     };
     data.volledigenaam = brpData?.Persoon?.Persoonsgegevens?.Naam ? brpData.Persoon.Persoonsgegevens.Naam : 'Onbekende gebruiker';
     data.items = verwerkingenData.Items;
-    data.startdate = startdate;
-    data.enddate = enddate;
+    data.startdate = startdate.substring(0, 'yyyy-mm-dd'.length);
+    data.enddate = enddate.substring(0, 'yyyy-mm-dd'.length);
 
     // render page
     const html = await render(data, __dirname + '/templates/verwerkingen.mustache', {
