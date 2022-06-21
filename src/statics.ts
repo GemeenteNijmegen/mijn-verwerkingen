@@ -28,11 +28,11 @@ export abstract class Statics {
    * BRP API endpoint
    */
   static readonly ssmBrpApiEndpointUrl: string = '/cdk/mijn-gegevens/brp-api-url';
-  
+
   /**
    * Verwerkingen API endpoint
    */
-   static readonly ssmVerwerkingenApiEndpointUrl: string = '/cdk/mijn-verwerkingen/verwerkingen-api-url';
+  static readonly ssmVerwerkingenApiEndpointUrl: string = '/cdk/mijn-verwerkingen/verwerkingen-api-url';
 
   /**
    * Verwerkingen API key

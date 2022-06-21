@@ -18,7 +18,7 @@ function parseEvent(event) {
     return { 
         'cookies': event?.cookies?.join(';'),
         'startdate': event?.queryStringParameters?.['date-start'] ?? new Date().toISOString(),
-        'enddate': event?.queryStringParameters?.['date-end'] ?? lastWeek.setDate(new Date().getDate()-7).toISOString()
+        'enddate': event?.queryStringParameters?.['date-end'] ?? lastWeek.toISOString()
     };
 }
 

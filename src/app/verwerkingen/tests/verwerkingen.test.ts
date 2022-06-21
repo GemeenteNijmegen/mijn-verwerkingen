@@ -6,10 +6,9 @@ import { SSMClient, GetParameterCommandOutput } from '@aws-sdk/client-ssm';
 import { ApiClient } from '@gemeentenijmegen/apiclient';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { mockClient } from 'jest-aws-client-mock';
 import * as Dotenv from 'dotenv';
+import { mockClient } from 'jest-aws-client-mock';
 import { verwerkingenRequestHandler } from '../verwerkingenRequestHandler';
-
 
 
 beforeAll(() => {
@@ -88,12 +87,12 @@ describe('Requests', () => {
     axiosMock.onGet().reply(200, returnData);
     const client = new ApiClient();
     const dynamoDBClient = new DynamoDBClient({ region: 'eu-west-1' });
-    const result = await verwerkingenRequestHandler('session=12345', {startdate: '2022-06-30', enddate: '2022-06-31'}, client, dynamoDBClient);
+    const result = await verwerkingenRequestHandler('session=12345', { startdate: '2022-06-30', enddate: '2022-06-31' }, client, dynamoDBClient);
     expect(result.body).toMatch('Verwerkte persoonsgegevens');
     fs.writeFile(path.join(__dirname, 'output', 'test.html'), result.body, () => {});
   });
 
- 
+
   test('Show actual results', async () => {
     // console.debug(process.env);
     axiosMock.restore();
@@ -109,7 +108,7 @@ describe('Requests', () => {
     secretsMock.mockImplementation(() => output);
     const client = new ApiClient();
     const dynamoDBClient = new DynamoDBClient({ region: 'eu-west-1' });
-    const result = await verwerkingenRequestHandler('session=12345',  {startdate: '2022-05-30', enddate: '2022-07-22'}, client, dynamoDBClient);
+    const result = await verwerkingenRequestHandler('session=12345', { startdate: '2022-05-30', enddate: '2022-07-22' }, client, dynamoDBClient);
     expect(result.body).toMatch('Verwerkte persoonsgegevens');
     fs.writeFile(path.join(__dirname, 'output', 'test-real.html'), result.body, () => {});
   });
