@@ -13,10 +13,12 @@ async function init() {
 const initPromise = init();
 
 function parseEvent(event) {
+    const lastWeek = new Date();
+    lastWeek.setDate(new Date().getDate()-7);
     return { 
         'cookies': event?.cookies?.join(';'),
         'startdate': event?.queryStringParameters?.['date-start'] ?? new Date().toISOString(),
-        'enddate': event?.queryStringParameters?.['date-end'] ?? new Date().toISOString()
+        'enddate': event?.queryStringParameters?.['date-end'] ?? lastWeek.setDate(new Date().getDate()-7).toISOString()
     };
 }
 
