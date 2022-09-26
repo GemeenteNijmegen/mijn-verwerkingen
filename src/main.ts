@@ -14,7 +14,7 @@ const acceptanceEnvironment = {
 
 const app = new App();
 
-if (process.env.BRANCH_NAME == 'acceptance') {
+if (process.env.BRANCH_NAME == 'acceptance' || process.env.BRANCH_NAME == undefined) {
   new PipelineStack(app, 'mijn-verwerkingen-pipeline-acceptance',
     {
       env: deploymentEnvironment,
